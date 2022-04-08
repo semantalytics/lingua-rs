@@ -15,6 +15,7 @@
  */
 
 #![allow(non_snake_case)]
+#![cfg(feature = "wasm")]
 
 use crate::builder::{MINIMUM_RELATIVE_DISTANCE_MESSAGE, MISSING_LANGUAGE_MESSAGE};
 use crate::{IsoCode639_1, IsoCode639_3, Language, LanguageDetector as Detector};
@@ -22,17 +23,16 @@ use itertools::Itertools;
 use serde::Serialize;
 use std::collections::HashSet;
 use std::str::FromStr;
-#[cfg(feature = "wasm")] 
 use wasm_bindgen::prelude::*;
 
-#[cfg_attr(feature = "wasm", wasm_bindgen)]
+#[wasm_bindgen]
 pub struct LanguageDetectorBuilder {
     languages: HashSet<Language>,
     minimum_relative_distance: f64,
     is_every_language_model_preloaded: bool,
 }
 
-#[cfg_attr(feature = "wasm", wasm_bindgen)]
+#[wasm_bindgen]
 pub struct LanguageDetector {
     detector: Detector,
 }
@@ -43,7 +43,7 @@ pub struct ConfidenceValue {
     confidence: f64,
 }
 
-#[cfg_attr(feature = "wasm", wasm_bindgen)]
+#[wasm_bindgen]
 impl LanguageDetectorBuilder {
     /// Creates and returns an instance of `LanguageDetectorBuilder` with all built-in languages.
     pub fn fromAllLanguages() -> Self {
@@ -227,7 +227,7 @@ impl LanguageDetectorBuilder {
     }
 }
 
-#[cfg_attr(feature = "wasm", wasm_bindgen)]
+#[wasm_bindgen]
 impl LanguageDetector {
     /// Detects the language of given input text.
     /// If the language cannot be reliably detected, `undefined` is returned.
