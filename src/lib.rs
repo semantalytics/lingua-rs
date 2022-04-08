@@ -291,6 +291,7 @@ pub use language::Language;
 pub use writer::{LanguageModelFilesWriter, TestDataFilesWriter};
 
 #[cfg(target_family = "wasm")]
+#[cfg(feature = "wasm")]
 pub use wasm::LanguageDetectorBuilder as WasmLanguageDetectorBuilder;
 
 #[cfg(test)]
